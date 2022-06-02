@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>フォロー登録</title>
+</head>
+<body>
+{{ template "header" }}
+<div class="messageArea">
+  {{if (.Messages)}}
+  <ul>
+    {{range $message := .Messages}}
+    <li>{{$message}}</li>
+    {{end}}
+  </ul>
+  {{end}}
+</div>
+フォロー登録
+<form action="follow-user" method="post">
+  <label>
+    follower:
+    <select name="follower">
+      {{range $var := .Users}}
+      <option value="{{$var.Id}}">{{$var.Name}}</option>
+      {{end}}
+    </select>
+  </label>
+  <label>
+    followee:
+    <select name="followee">
+      {{range $var := .Users}}
+      <option value="{{$var.Id}}">{{$var.Name}}</option>
+      {{end}}
+    </select>
+  </label>
+  <input type="submit" value="登録"/>
+</form>
+</body>
+</html>

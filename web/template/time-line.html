@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Timeline</title>
+</head>
+<body>
+{{ template "header" }}
+<ul>
+  {{range $post := .Posts}}
+  <li>{{$post.Id}}/{{$post.Message}}/{{$post.PostedAt}}</li>
+  {{end}}
+</ul>
+</body>
+</html>

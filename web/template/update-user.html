@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ユーザ選択/ユーザ登録</title>
+</head>
+<body>
+<div class="messageArea">
+  {{if (.Messages)}}
+  <ul>
+    {{range $message := .Messages}}
+    <li>{{$message}}</li>
+    {{end}}
+  </ul>
+  {{end}}
+</div>
+ユーザ選択
+<select name="users" onchange="choose(this)">
+  <option value="null" selected>-</option>
+  {{range $var := .Users}}
+  <option value="{{$var.Id}}">{{$var.Name}}</option>
+  {{end}}
+</select>
+</label>
+
+<label>
+
+  ユーザ登録
+  <form action="register-user" method="post">
+    <label>
+      ユーザ名:
+      <input type="text" name="name"/>
+    </label>
+    <input type="submit" value="登録"/>
+  </form>
+</label>
+
+<script>
+  const userIdKey = 'current-user-id';
+  const userNameKey = 'current-user-name';
+
+  function choose(obj) {
+    const idx = obj.selectedIndex;
+    localStorage.setItem(userIdKey, obj.options[idx].value);
+    localStorage.setItem(userNameKey, obj.options[idx].text);
+
+    window.location.href = './tweet'
+  }
+</script>
+</body>
+</html>

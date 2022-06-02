@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ツイート</title>
+</head>
+<body>
+{{ template "header" }}
+<div class="messageArea">
+  {{if (.Messages)}}
+  <ul>
+    {{range $message := .Messages}}
+    <li>{{$message}}</li>
+    {{end}}
+  </ul>
+  {{end}}
+</div>
+ツイート
+<form action="tweet" name="tweetForm" method="post">
+  <label>
+    メッセージ:
+    <input type="text" name="message"/>
+  </label>
+  <input type="hidden" name="tweetFrom"/>
+  <input type="submit" value="投稿"/>
+</form>
+</body>
+
+<script>
+  const form = document.getElementsByName('tweetForm')[0];
+  form.addEventListener('submit',
+      function (event) {
+        event.preventDefault();
+
+        const userIdKey = 'current-user-id';
+        document.getElementsByName('tweetFrom')[0].value = localStorage.getItem(userIdKey)
+        form.submit();
+      }
+  )
+</script>
+</html>

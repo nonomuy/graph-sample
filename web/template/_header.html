@@ -1,0 +1,28 @@
+{{define "header"}}
+<div class="header">
+  <div class="userName"></div>
+  <a class="time-line">タイムライン</a>
+  <a href="./update-user">ユーザ選択/ユーザ登録</a>
+  <a href="./follow-user">フォロー登録</a>
+  <a href="./tweet">ツイート</a>
+
+</div>
+<script>
+  window.onload = function () {
+    const userIdKey = 'current-user-id';
+    const userNameKey = 'current-user-name';
+    if (localStorage.getItem(userIdKey) === null ||
+        localStorage.getItem(userNameKey) === null
+    ) {
+      window.location.href = './choose-user'
+    } else {
+      document.getElementsByClassName('userName')[0]
+          .innerText = '@' + localStorage.getItem(userNameKey);
+    }
+
+    const timeLineLink = document.getElementsByClassName("time-line")[0];
+    const userId = localStorage.getItem(userIdKey);
+    timeLineLink.href = "./time-line?userId=" + userId;
+  }
+</script>
+{{ end }}
